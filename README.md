@@ -10,6 +10,6 @@ The command should display something like
 201511 means : year 2015, month November(11) 
 
 # Running Instructions
-export OMP_NUM_THREADS=<omp_num_threads> //To specify the number of parallel threads for open mp
-g++ -std=c++11 ga.cpp -fopenmp -o ga
-./ga <population_size> 
+export OMP_NUM_THREADS=<omp_num_threads> //To specify the number of parallel threads for open mp <br>
+g++ -std=c++11 ga.cpp -fopenmp -o ga <br>
+./ga <population_size> <br>
