@@ -12,5 +12,7 @@ The command should display something like : <br>
 # Running Instructions
 <b> To specify the number of parallel threads for open mp </b> <br>
 export OMP_NUM_THREADS=<omp_num_threads> <br>
+<b> Compile the code </b> <br>
 g++ -std=c++11 ga.cpp -fopenmp -o ga <br>
+<b> Run the code </b> <br>
 ./ga <population_size> <br>
