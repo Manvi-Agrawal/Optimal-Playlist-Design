@@ -1,6 +1,5 @@
 /*
-Made by Manvi Agrawal as an assignment for Soft Computing under the guidance of
-Dr. Shampa Chakraverty
+Part of coursework for Soft Computing under the guidance of Dr. Shampa Chakraverty 
 
 Run on a ubuntu system with min gcc version of 4.2.0
 To check if OPENMP is installed, run
@@ -10,12 +9,17 @@ The command should display something like
 #define _OPENMP 201511
 201511 means : year 2015, month November(11) 
 
-export OMP_NUM_THREADS=<omp_num_threads> //To specify the number of parallel threads for open mp
+To specify the number of parallel threads for open mp
+export OMP_NUM_THREADS=<omp_num_threads> 
+
+Compile the code
 g++ -std=c++11 ga.cpp -fopenmp -o ga
+
+Run the Code
 ./ga <population_size> 
 
 
-A program designed to find optimal solution for playlidst scheduling using aco
+A program designed to find optimal solution for playlidst scheduling using genetic algorithm
 The following are given about the system:
 a) The duration of songs
 b) Suitability[i][j] representing the suitability of activity j given song i is being played
@@ -317,28 +321,6 @@ void print_population()
 		cout << "{ num_switchover : " << num_switchover << "}, ";
 		cout << "{ num_distinct_activities : " << num_distinct_activities << "} \n";
 	}
-	/*
-	for(int i=0; i<num_ants; i++)
-	{
-		int credits_acquired=0;
-		int time_spent=0;
-		float total_difficulty=0;
-		cout<<"{";
-		for(int j=0; j<path[i].size(); j++)
-		{
-			cout << path[i][j] << ", " ;
-			credits_acquired += credits[ path[i][j] ];
-			time_spent += time_required[ path[i][j] ];
-			if( j != path[i].size()-1 )
-			{
-				total_difficulty += difficulty[ path[i][j]][path[i]
-				[j+1]];
-			}
-	}
-	cout <<"}, {credits : " << credits_acquired << "}, ";
-	cout << "{ time spent : " << time_spent << "}, ";
-	cout << "{ difficulty : " << total_difficulty << "} \n";
-	}*/
 }
 
 void run()
