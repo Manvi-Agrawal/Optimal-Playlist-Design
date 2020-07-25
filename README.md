@@ -5,11 +5,12 @@
 ## To check if OPENMP is installed, run
 echo | cpp -fopenmp -dM | grep -i open
 
-The command should display something like
-#define _OPENMP 201511
+The command should display something like : <br>
+#define _OPENMP 201511 <br>
 201511 means : year 2015, month November(11) 
 
 # Running Instructions
-export OMP_NUM_THREADS=<omp_num_threads> //To specify the number of parallel threads for open mp <br>
+<b> To specify the number of parallel threads for open mp </b>
+export OMP_NUM_THREADS=<omp_num_threads> <br>
 g++ -std=c++11 ga.cpp -fopenmp -o ga <br>
 ./ga <population_size> <br>
