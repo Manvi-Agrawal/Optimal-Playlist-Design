@@ -1,5 +1,19 @@
 # Optimal-Playlist-Design
- A program designed to find optimal solution for playlist scheduling using genetic algorithm
+A program designed to find optimal solution for playlist scheduling using genetic algorithm. <br>
+Part of coursework for Soft Computing under the guidance of Dr. Shampa Chakraverty. <br>
+The following are given about the system : <br>
+a) The duration of songs <br>
+b) Suitability[i][j] representing the suitability of activity j given song i is being played <br>
+
+## Objectives
+The following objectives needs to be fulfilled :
+a) The total value needs to be maximized.
+b) The number of switchovers between activities must be minimized.
+c) The number of distinct activities must be maximized
+
+## Constraints
+The following is/are the constraints :
+a) Switchover Time is 10 minutes
 
 # Run on a linux system with min gcc version of 4.2.0
 ## To check if OPENMP is installed, run
