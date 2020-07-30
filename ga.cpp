@@ -59,9 +59,13 @@ struct trapezoid
 };
 
 
+class GeneticAlgorithm{
 
-	
+public:
+	GeneticAlgorithm(int _population_size){ population_size = _population_size;}
 	void run();
+
+private:
 	vector< vector<gene> > population;
 	vector<int> duration;
 	vector< vector<float> > suitability;
@@ -70,23 +74,22 @@ struct trapezoid
 	float switchover_time = 10;
 	int num_songs, num_activities, population_size, num_gen;
 	
-	
-	
+		
 	float w_val = 0.4, w_switch_over = 0.3, w_num_activities = 0.3;
-	
-
 	float mu, delta;
+	
 	void input_parameters();/*To take input from the user */
 	void output_parameters();/*To display generated values to the user */
 	void generate_initial_population();
 	void crossover();
 	void mutation();
 	void selection();
+	void print_population();
 
 	float value_activity(int activity_num, float duration_activity);
 	float calculate_fitness(vector<gene> &chromosome);
 	bool compare_fitness(vector<gene> &a, vector<gene> &b);	
-
+};
 
 //Driver Code
 int main(int argc, char* argv[])
@@ -97,13 +100,14 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		population_size=stoi(argv[1]);
-		run();
+		int population_size=stoi(argv[1]);
+		GeneticAlgorithm ga = GeneticAlgorithm(population_size);
+		ga.run();
 	}
 return 0;
 }
 
-void input_parameters()
+void GeneticAlgorithm :: input_parameters()
 {
 
 	//Input number of generations
@@ -141,7 +145,7 @@ void input_parameters()
 	population = vector< vector<gene> >(population_size, vector<gene>(num_songs));
 }
 
-void output_parameters()
+void GeneticAlgorithm :: output_parameters()
 {
 	cout << "Displaying Generated values : \n" ;
 	//Output generated duration of each song
@@ -169,7 +173,7 @@ void output_parameters()
 	}
 }
 
-void generate_initial_population()
+void GeneticAlgorithm :: generate_initial_population()
 {
 	#pragma omp parallel for
 	for(int i=0; i<population_size; i++)
@@ -183,7 +187,7 @@ void generate_initial_population()
 	}
 }
 
-float value_activity(int activity_num, float duration_activity)
+float GeneticAlgorithm :: value_activity(int activity_num, float duration_activity)
 {	
 	if( duration_activity <0)
 		return 0;
@@ -208,7 +212,7 @@ float value_activity(int activity_num, float duration_activity)
 
 }
 
-float calculate_fitness(vector<gene> &chromosome)
+float GeneticAlgorithm :: calculate_fitness(vector<gene> &chromosome)
 {
 	float value_gained = 0 ;
 	int num_switchover = -1 ; //Because last activity will register a switchover
@@ -239,17 +243,19 @@ float calculate_fitness(vector<gene> &chromosome)
 	return fitness_score;
 }
 
-bool compare_fitness(vector<gene> &a, vector<gene> &b)
+bool GeneticAlgorithm :: compare_fitness(vector<gene> &a, vector<gene> &b)
 {
 	return calculate_fitness(a) > calculate_fitness(b);
 }
 
-void  selection()
+void GeneticAlgorithm :: selection()
 {
-	sort(population.begin(),population.end(),compare_fitness);
+	using namespace std::placeholders;
+  	//std::sort(arr, arr+someSize, std::bind(&MyClass::doCompare, this, _1, _2)
+	sort(population.begin(),population.end(),bind(&GeneticAlgorithm::compare_fitness, this, _1, _2));
 }
 
-void  crossover()
+void GeneticAlgorithm :: crossover()
 {
 	int num_crossover_pt = delta*num_songs;
 	#pragma omp parallel for
@@ -264,7 +270,7 @@ void  crossover()
 	}
 }
 
-void  mutation()/*single point mutation*/
+void GeneticAlgorithm :: mutation()/*single point mutation*/
 {
 	int num_mutation = mu*population_size;
 	set<int> mutation_points = set<int>();
@@ -282,7 +288,7 @@ void  mutation()/*single point mutation*/
 	}
 }
 
-void print_population()
+void GeneticAlgorithm :: print_population()
 {
 	cout<< "\nPopulation matrix :\n";
 	float value_gained = 0 ;
@@ -323,7 +329,7 @@ void print_population()
 	}
 }
 
-void run()
+void GeneticAlgorithm :: run()
 {
 	input_parameters();
 	output_parameters();
