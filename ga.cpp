@@ -251,7 +251,7 @@ bool GeneticAlgorithm :: compare_fitness(vector<gene> &a, vector<gene> &b)
 void GeneticAlgorithm :: selection()
 {
 	using namespace std::placeholders;
-  	//std::sort(arr, arr+someSize, std::bind(&MyClass::doCompare, this, _1, _2)
+  	// Need to bind comparator if comaprator is member of the class
 	sort(population.begin(),population.end(),bind(&GeneticAlgorithm::compare_fitness, this, _1, _2));
 }
 
